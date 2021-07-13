@@ -1,0 +1,24 @@
+package com.example.demo.models;
+
+import  com.example.demo.models.FDRequest;
+
+rule "FD Interest Rate for CCA Bank duration more than 1 year and below 2 years"
+    when
+        fdObject : FDRequest( bankName=="CCA" && durationInYear >= 1 && durationInYear < 2);
+    then
+        fdObject.setFdInterestRate("30%");
+end;
+
+rule "FD Interest Rate for Eco Bank for duration more than or equal to 2 years"
+    when
+        fdObject : FDRequest( bankName=="EcoBank" && durationInYear >= 2);
+    then
+        fdObject.setFdInterestRate("60%");
+end;
+
+rule "FD Interest Rate for First Bank for duration more than or equal to 1 year"
+    when
+        fdObject : FDRequest( bankName=="FirstBank" && durationInYear >= 1);
+    then
+        fdObject.setFdInterestRate("30%");
+end;
